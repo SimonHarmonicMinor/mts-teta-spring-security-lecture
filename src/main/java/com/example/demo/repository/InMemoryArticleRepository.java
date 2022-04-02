@@ -19,7 +19,7 @@ public class InMemoryArticleRepository implements
       Stream.of(
               new Article(1L, "java", "java для начинающих"),
               new Article(2L, "python", "python для продвинутых"),
-              new Article(2L, "javascript", "javascript для бэкенда")
+              new Article(3L, "javascript", "javascript для бэкенда")
           )
           .collect(toMap(Article::getId, identity()))
   );
