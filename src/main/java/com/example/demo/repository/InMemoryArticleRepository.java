@@ -7,6 +7,7 @@ import com.example.demo.domain.Article;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class InMemoryArticleRepository implements
   }
 
   @Override
-  public Article findById(Long id) {
-    return ARTICLES.get(id);
+  public Optional<Article> findById(Long id) {
+    return Optional.ofNullable(ARTICLES.get(id));
   }
 
   @Override

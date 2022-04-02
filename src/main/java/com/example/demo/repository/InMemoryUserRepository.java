@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toMap;
 import com.example.demo.domain.Role;
 import com.example.demo.domain.User;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,15 @@ public class InMemoryUserRepository implements UserRepository {
       )
       .collect(toMap(User::getId, identity()));
 
-  public User findById(Long id) {
-    return USERS.get(id);
+  public Optional<User> findById(Long id) {
+    return Optional.ofNullable(USERS.get(id));
+  }
+
+  @Override
+  public Optional<User> findByUserNameAndPassword(String username, String password) {
+    return USERS.values()
+        .stream()
+        .filter(user -> user.getUsername().equals(username) && user.getPassword().equals(password))
+        .findFirst();
   }
 }
